@@ -55,26 +55,24 @@ jQuery(window).load(function(){
    for(let i=17; i<=28; i++){
     productValue.push(dropDowns[i].getElementsByTagName('div')[0].getElementsByTagName('span')[0].innerHTML);
    }
-  console.log(productValue);
+
   let totalProducts=count(productValue, 'Yes');
 
   if(totalProducts>1){
     multipleProducts=true;
   }
 
-  console.log('multiple products', multipleProducts);
-
+  console.log('values', values);
    for(let iterator=0; iterator<5; iterator++){
-      let init=Array(15).fill(0);
+      let init=Array(16).fill(0);
       plans.push(init);
    }
-   console.log('values', values);
    fillProjectDuration(values, "Project Duration anticipated in weeks*");
    fillTrainingSession(values, "Total number of Training sessions needed*");
    fillProjectManagement(values, "Project Management*");
    fillRemoteMeetings(values, "# of remote meetings per week with customer*");
    fillSupportNeeded(values, "Support needed with Solutioning*");
-   fillTotalHours(values, "Per week total number of hours (including meetings…involved for backend coordinations, & trainings)*");
+   fillTotalHours(values, "Per week total number of hours (including meetings, configurations, sessions, non-client facing hours including efforts involved for backend coordinations, & trainings)*");
    fillAnticipatedHours(values, "Total Number of Hours anticipated (worst case)*");
    fillPhases(values, "Number of Phases (Duration per phase is 3 weeks)*");
    fillProgressStatus(values, "Weekly progress status review calls*");
@@ -92,6 +90,48 @@ jQuery(window).load(function(){
   //  2 plus
   //  3 expert
   //  4 enterprise
+
+
+   plans[0][2]='-';
+   plans[0][3]='-';
+   plans[0][4]='-';
+   plans[0][7]='-';
+   plans[0][8]='-';
+   plans[0][9]='-';
+   plans[0][10]='-';
+   plans[0][11]='-';
+   plans[0][12]='-';
+
+   plans[1][2]='-';
+   plans[1][3]='-';
+   plans[1][4]='-';
+   plans[1][10]='-';
+   plans[1][7]='-';
+   plans[1][8]='-';
+   plans[1][9]='-';
+   plans[1][11]='-';
+   plans[1][12]='-';
+
+   plans[2][4]='-';
+   plans[2][8]='-';
+   plans[2][9]='-';
+   plans[2][10]='-';
+   plans[2][11]='-';
+   plans[2][12]='-';
+
+
+   plans[3][10]='-';
+   plans[3][12]='-';
+
+   plans[4][2]='-';
+   plans[4][4]='-';
+   plans[4][9]='-';
+   plans[4][10]='-';
+   plans[4][11]='-';
+   plans[4][13]='-';
+   plans[4][15]='-';
+
+
 
    console.log('plans', plans);
    let percentages={}
@@ -171,18 +211,15 @@ function fillMigrations(values, value){
     changeTheValue(2, 15);
     changeTheValue(3, 15);
   }
-  plans[4][15]='-';
 }
 function fillIntegrations(values, value){
+  console.log('value', values[value], value);
     if(values[value]==="No bespoke app needed"){
       changeTheValue(0, 14);
     }
-    else if(values[value]===" Upto one bespoke app as an add-on"){
-      changeTheValue(1, 14);
-    }
     else if(values[value]==="Upto one bespoke app as an add-on"){
+      changeTheValue(1, 14);
       changeTheValue(2, 14);
-
     }
     else if(values[value]==="Upto three bespoke apps as an add-on"){
       changeTheValue(3, 14);
@@ -205,17 +242,11 @@ function fillOwnerShip(values, value){
           else if(values[value]==="Freshworks will have to do the configurations with no hands on help from customer"){
             changeTheValue(3, 13);
           }
-          plans[4][13]='-';
-
 }
 function fillAgents(values, value){
           if(values[value]==="More than 150"){
             changeTheValue(4, 12);
           }
-          plans[0][12]='-';
-          plans[1][12]='-';
-          plans[2][12]='-';
-          plans[3][12]='-';
 }
 function fillTeamMaturity(values, value){
           if(values["Complexity of Customer's environment/Landscape*"]==='Simple'){
@@ -255,10 +286,6 @@ function fillCommiteeMeeting(values, value){
           if(values[value]==="Yes it is required"){
             changeTheValue(3, 9);
           }
-          plans[0][9]='-';
-          plans[1][9]='-';
-          plans[2][9]='-';
-          plans[4][9]='-';
 }
 function fillProgressStatus(values, value){
             if(values[value]==="One call per week"){
@@ -267,10 +294,6 @@ function fillProgressStatus(values, value){
           else if(values[value]==="More than One call per week"){
             changeTheValue(4, 8);
           }
-          plans[0][8]='-';
-          plans[1][8]='-';
-          plans[2][8]='-';
-
 }
 function fillPhases(values, value){
           if(values[value]==="2"){
@@ -282,8 +305,6 @@ function fillPhases(values, value){
           else if(values[value]==="More than 4"){
             changeTheValue(4, 7);
           }
-          plans[0][7]='-';
-          plans[1][7]='-';
 }
 function fillAnticipatedHours(values, value){
       if(values[value]==="Less than 4"){
@@ -305,6 +326,7 @@ function fillAnticipatedHours(values, value){
 }
 
 function fillTotalHours(values, key){
+  console.log('value', values[key], key);
   if(values[key]==="1 to 2"){
     changeTheValue(0, 5);
   }
@@ -323,55 +345,48 @@ function fillTotalHours(values, key){
   }
 }
 function fillSupportNeeded(values, key){
-            if(values[key]==="Yes it is required"){
-            changeTheValue(3, 4);
-          }
-            plans[0][4]='-';
-            plans[1][4]='-';
-            plans[4][4]='-';
-            plans[2][4]='-';
+    if(values[key]==="Yes it is required"){
+    changeTheValue(3, 4);
+  }
 }
 function fillRemoteMeetings(values, key){
-            if(values[key]==='2'){
-            changeTheValue(2, 3);
-          }
-          else if(values[key]==='3'){
-            changeTheValue(3, 3);
-          }
-          else if(values[key]==="More than 3"){
-            changeTheValue(4, 3);
-          }
-            plans[0][3]='-';
-            plans[1][3]='-';
+    if(values[key]==='2'){
+      changeTheValue(2, 3);
+    }
+    else if(values[key]==='3'){
+      changeTheValue(3, 3);
+    }
+    else if(values[key]==="More than 3"){
+      changeTheValue(4, 3);
+    }
+
 }
  function fillProjectManagement(values, key){
-            if(values[key]==='Project Management assistance required'){
-            changeTheValue(2, 2);
-          }
-          else if(values[key]==='Project Management assistance with regular steering committee reviews'){
-            changeTheValue(3, 2);
-          }
-            plans[0][2]='-';
-            plans[1][2]='-';
-            plans[4][2]='-';
+    if(values[key]==='Project Management assistance required'){
+      changeTheValue(2, 2);
+    }
+    else if(values[key]==='Project Management assistance with regular steering committee reviews'){
+      changeTheValue(3, 2);
+    }
+
 }
 
  function  fillProjectDuration(values, key){
-if(values[key]==='3'){
-  changeTheValue(0, 0);
-}
-else if(values[key]==='6'){
-  changeTheValue(1, 0);
-}
-else if(values[key]==='10'){
-  changeTheValue(2, 0);
-}
-else if(values[key]==='14'){
-  changeTheValue(3, 0);
-}
-else{
-  changeTheValue(4, 0);
-}
+  if(values[key]==='3'){
+    changeTheValue(0, 0);
+  }
+  else if(values[key]==='6'){
+    changeTheValue(1, 0);
+  }
+  else if(values[key]==='10'){
+    changeTheValue(2, 0);
+  }
+  else if(values[key]==='14'){
+    changeTheValue(3, 0);
+  }
+  else{
+    changeTheValue(4, 0);
+  }
 }
 
 function fillTrainingSession(values, key){
